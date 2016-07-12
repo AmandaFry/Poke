@@ -37,9 +37,11 @@ class User(Controller):
         user_info = {
             'f_name' : request.form['f_name'],
             'l_name' : request.form['l_name'],
+            'alias' : request.form['alias'],
             'email' : request.form['email'],
             'passw' : request.form['passw'],
-            'conf_passw' : request.form['conf_passw']
+            'conf_passw' : request.form['conf_passw'],
+            'birthday' : request.form['birthday']
         }
 
         #sending information to model
