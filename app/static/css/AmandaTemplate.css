@@ -54,6 +54,11 @@
 			border: solid 1px black;
 		}
 
+		.boldme{
+			font-weight: bold;
+			color: blue;
+			font-size: 18px;
+		}
 	.footer{
 		width:970px;
 		height: 100px:;

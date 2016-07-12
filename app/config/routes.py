@@ -4,6 +4,10 @@ routes['default_controller'] = 'User'
 routes['POST']['/login'] = 'User#login'
 routes['POST']['/register'] = 'User#register'
 routes['GET']['/logout'] = 'User#logout'
+routes['GET']['/poke_summary'] = 'Poke#poke_summary'
+routes['GET']['/show_others'] = 'Poke#show_others'
+routes['POST']['/poke_me/<id>'] = 'Poke#poke_me'
+
 
 
 """

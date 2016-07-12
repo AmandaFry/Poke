@@ -29,7 +29,7 @@ class User(Controller):
             #login and store name and id in session
             session['id'] = user_login['user'][0]['id']
             session['name'] = user_login['user'][0]['first_name'] + ' ' + user_login['user'][0]['last_name']
-            return redirect('/dashboard')
+            return redirect('/poke_summary')
  
 
     def register(self):

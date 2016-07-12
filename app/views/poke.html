@@ -11,20 +11,47 @@
 <body>	
     <div class="container">
         <div class="header">
-            <h1><span>(Python) </span> Dashboard Page</h1>
+            <h1><span>(Python) </span> Poke - Exam E - Poke Summary page</h1>
             <h3>Assigment - optional</h3>
             <div class="descr">
                 <p>Assigment description:</p>
-                <p>User login and register page</p>
+                <p>Something like in Facebook using a poke to say hello to a friend</p>
                 <ul>
                     <li>Index page to login and register</li>
+                    <li>Poke show how many time I or otheres have been poked.</li>
                 </ul>
             </div>
         </div><!-- end of header content-->
         <div class="maincontent">
+             <p style="text-align:right"> Welcome: <span class="boldme">{{ session['name']}}</span> - ({{ session['id']}}) - <a href="/logout">Logout</a></p>
 
+            <h3>People poked you:</h3>
+            {% if being_poked %}
+                <div class="row"><p> poked you times.</p></div>
+            {% endif%}
+            </br>
+            <h3>People you may want to poke:</h3>
+            <table>
+                <tr>
+                    <th class="tab">Name</th>
+                    <th class="tab">Alias</th>
+                    <th class="tab">Email Address</th>
+                    <th class="tab">Poke History</th>
+                    <th class="tab">Action</th>
+                </tr>
+                {% if show_others%}
+                    {% for other in show_others %}
+                        <tr>
+                           <td class="tab">{{ other['first_name'] }} {{ other['last_name'] }}</td>
+                           <td class="tab">{{ other['alias'] }}</td>
+                           <td class="tab">{{ other['email'] }}</td>
+                           <td class="tab">poke history</td>
+                           <td class="tab"><a href="/poke_me/{{ other['id'] }}">Poke - {{ other['id'] }}<a></td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </table>
 
-            <h3>logged in page</h3>
 
             
 
