@@ -1,5 +1,6 @@
 from system.core.model import Model
 from flask import Flask, session
+from datetime import datetime
 import re
 
 #this is used for verifications
@@ -47,6 +48,9 @@ class User_Model(Model):
     def register_user(self, user_info):
         errors=[]
 
+        #setting up todays date to use it for date validation
+        today = datetime.now().strftime("%Y-%m-%d")
+
         #validation prior to inserting data to db
         if len(user_info['f_name']) < 2:
             errors.append("First name cannot be empty")
@@ -54,6 +58,8 @@ class User_Model(Model):
             errors.append("Please enter a valid first name")
         elif len(user_info['l_name']) < 2 :
             errors.append("Last name cannot be empty")
+        elif len(user_info['alias']) < 2 :
+            errors.append("Alias cannot be empty")
         elif not NOSPACE_REGEX.match(user_info['f_name']):
             errors.append("Please enter a valid last name")
         elif len(user_info['email']) < 2 :
@@ -66,7 +72,9 @@ class User_Model(Model):
             errors.append("Confirm password cannot be empty")
         elif not (user_info['passw'] == user_info['conf_passw']):
             errors.append("Password and confirm password must match")   
-      
+        elif today < user_info['birthday']:
+            erorrs.append("You must been born at least yesterday to use this application")
+
         if errors:
             return {"status": False, "errors": errors}
         else:
@@ -79,20 +87,22 @@ class User_Model(Model):
                 errors.append("Email account already in use")
                 return {"status": False, "errors": errors}
             else:
-                query = "INSERT INTO users (first_name, last_name, email, password, created_at, updated_at) VALUES (:f_name, :l_name, :email, :passw, NOW(), NOW())"
+                query = "INSERT INTO users (first_name, last_name, alais, email, password, birthday, created_at, updated_at) VALUES (:f_name, :l_name, :alias, :email, :passw, :birthday, NOW(), NOW())"
                 #password needs to be converted from plain text before can be part of data
                 password = user_info['passw']
                 hashed_pw = self.bcrypt.generate_password_hash(password)
                 data = {
                     'f_name':user_info['f_name'],
                     'l_name':user_info['l_name'],
+                    'alias' :user_info['alias']
                     'email':user_info['email'],
                     'passw':hashed_pw,
+                    'birthday':user_info['birthday']
                 }
                 registered_user = self.db.query_db(query, data)
-                # print ('%' * 25)
-                # print registered_user
-                # print ('%' * 25)
+                print ('%' * 25)
+                print registered_user
+                print ('%' * 25)
                 return {"status": True }
                 
 
