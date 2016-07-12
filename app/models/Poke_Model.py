@@ -6,20 +6,18 @@ class Poke_Model(Model):
         super(Poke_Model, self).__init__()
 
     def being_poked(self):
-        pass
+        # query = "SELECT * FROM pokes WHERE being_poked = :id ORDER BY number_of_poke DESC"
+        query = "SELECT users.first_name, pokes.number_of_poke FROM users JOIN pokes ON users.id = pokes.poking WHERE being_poked = :id ORDER BY number_of_poke DESC;"
+        data = {'id' : session['id']}
+        being_poked = self.db.query_db(query,data)
+        return (being_poked)
 
     def show_others(self):
-        # query = "SELECT * FROM users WHERE id != :id"
         query = "SELECT users.id, users.first_name, users.last_name, users.alias, users.email, pokes.number_of_poke FROM users LEFT JOIN pokes ON users.id = pokes.being_poked WHERE users.id != :id "
         data = { 'id' : session['id']}
         show_others = self.db.query_db(query,data)
         return (show_others)
 
-    def other_pokes(self):
-        query = "SELECT * FROM pokes"
-        data = {}
-        other_pokes = self.db.query_db(query,data)
-        return (other_pokes)
     
     def poke_me(self, id):
         query = "SELECT * FROM pokes WHERE being_poked = :poke_me_id AND poking = :poking_id"
@@ -50,8 +48,3 @@ class Poke_Model(Model):
             self.db.query_db(query,data)
         return (poke_me)
 
-    def other_pokes(self):
-        query = "SELECT * FROM pokes"
-        data = {}
-        other_pokes = self.db.query_db(query,data)
-        return (other_pokes)

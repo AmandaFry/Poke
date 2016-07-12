@@ -27,7 +27,9 @@
 
             <h3>People poked you:</h3>
             {% if being_poked %}
-                <div class="row"><p> poked you times.</p></div>
+                {% for poke in being_poked %}
+                    <div class="row"><p> {{ poke['first_name']}} poked you {{ poke['number_of_poke'] }} times.</p></div>
+                {% endfor %}
             {% endif%}
             </br>
             <h3>People you may want to poke:</h3>
