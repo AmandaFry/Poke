@@ -50,6 +50,7 @@ class User_Model(Model):
 
         #setting up todays date to use it for date validation
         today = datetime.now().strftime("%Y-%m-%d")
+        valid_date = '2016-7-01'
 
         #validation prior to inserting data to db
         if len(user_info['f_name']) < 2:
@@ -73,6 +74,7 @@ class User_Model(Model):
         elif not (user_info['passw'] == user_info['conf_passw']):
             errors.append("Password and confirm password must match")   
         elif today < user_info['birthday']:
+        # elif valid_date < user_info['birthday']:
             errors.append("You must been born at least yesterday to use this application")
 
         if errors:
@@ -87,7 +89,7 @@ class User_Model(Model):
                 errors.append("Email account already in use")
                 return {"status": False, "errors": errors}
             else:
-                query = "INSERT INTO users (first_name, last_name, alias, email, password, birthday, created_at, update_at) VALUES (:f_name, :l_name, :alias, :email, :passw, :birthday, NOW(), NOW())"
+                query = "INSERT INTO users (first_name, last_name, alias, email, password, birthday, created_at, updated_at) VALUES (:f_name, :l_name, :alias, :email, :passw, :birthday, NOW(), NOW())"
                 #password needs to be converted from plain text before can be part of data
                 password = user_info['passw']
                 hashed_pw = self.bcrypt.generate_password_hash(password)

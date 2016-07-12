@@ -11,11 +11,16 @@ class Poke(Controller):
         being_poked = self.models['Poke_Model'].being_poked()
         #show other users
         show_others = self.models['Poke_Model'].show_others()
-        return self.load_view('poke.html', being_poked=being_poked, show_others=show_others)
+        print ('%' * 25)
+        print show_others
+        print ('%' * 25)
+        #show the number of time others being poked
+        other_pokes = self.models['Poke_Model'].other_pokes()
+        return self.load_view('poke.html', being_poked=being_poked, show_others=show_others, other_pokes=other_pokes)
 
     def poke_me(self, id):
-        poke_me = self.models['Poke_Model'].po(id)
-        print ('%' * 25)
-        print poke_me
-        print ('%' * 25)
-        pass
+        poke_me = self.models['Poke_Model'].poke_me(id)
+        # print ('%' * 25)
+        # print poke_me
+        # print ('%' * 25)
+        return redirect ('/poke_summary')
