@@ -12,7 +12,7 @@ class Poke(Controller):
         #show other users
         show_others = self.models['Poke_Model'].show_others()
         # print ('%' * 25)
-        # print show_others
+        # print show_others[0]
         # print ('%' * 25)
         return self.load_view('poke.html', being_poked=being_poked, show_others=show_others)
 
