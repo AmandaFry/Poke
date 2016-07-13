@@ -24,8 +24,9 @@
         </div><!-- end of header content-->
         <div class="maincontent">
              <p style="text-align:right"> Welcome: <span class="boldme">{{ session['name']}}</span> - ({{ session['id']}}) - <a href="/logout">Logout</a></p>
-
-            <h3>People poked you:</h3>
+            {% if number_of_pokes %}
+                <h3>{{ number_of_pokes[0]['counted'] }} People poked you:</h3>
+            {% endif %}
             {% if being_poked %}
                 {% for poke in being_poked %}
                     <div class="row"><p> {{ poke['first_name']}} poked you {{ poke['number_of_poke'] }} times.</p></div>
