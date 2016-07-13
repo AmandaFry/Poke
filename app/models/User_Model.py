@@ -50,7 +50,7 @@ class User_Model(Model):
 
         #setting up todays date to use it for date validation
         today = datetime.now().strftime("%Y-%m-%d")
-        valid_date = '2016-7-01'
+        valid_date = '2015-7-01'
 
         #validation prior to inserting data to db
         if len(user_info['f_name']) < 2:
@@ -73,9 +73,9 @@ class User_Model(Model):
             errors.append("Confirm password cannot be empty")
         elif not (user_info['passw'] == user_info['conf_passw']):
             errors.append("Password and confirm password must match")   
-        elif today < user_info['birthday']:
-        # elif valid_date < user_info['birthday']:
-            errors.append("You must been born at least yesterday to use this application")
+        # elif today < user_info['birthday']:
+        elif valid_date < user_info['birthday']:
+            errors.append("You must been born at least 1 year ago to use this application")
 
         if errors:
             return {"status": False, "errors": errors}
