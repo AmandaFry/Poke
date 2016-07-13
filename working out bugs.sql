@@ -26,3 +26,20 @@ JOIN pokes ON users.id = pokes.poking
 WHERE being_poked = 1 ORDER BY number_of_poke DESC;
 
 SELECT * FROM pokes;
+
+SELECT SUM(number_of_poke) FROM pokes WHERE being_poked = 2;
+
+-- summed up all of it to first user
+SELECT  users.id, users.first_name, users.last_name, users.alias, users.email, sum(pokes.number_of_poke) AS sumup FROM users 
+LEFT JOIN pokes ON users.id = pokes.being_poked;
+WHERE users.id = 1;
+
+SELECT users.id, users.first_name, users.last_name, users.alias, users.email, pokes.number_of_poke FROM users 
+LEFT JOIN pokes ON users.id = pokes.being_poked
+WHERE users.id !=4;
+
+
+SELECT SUM(number_of_poke) FROM pokes WHERE being_poked = 3;
+
+SELECT COUNT(*) FROM users
+

@@ -33,6 +33,12 @@ class Poke_Model(Model):
                 query = "SELECT users.id, users.first_name, users.last_name, users.alias, users.email, sum(pokes.number_of_poke) AS Sumup FROM users LEFT JOIN pokes ON users.id = pokes.being_poked WHERE users.id = :id "
                 data = {'id' : count}
                 result = self.db.query_db(query,data)
+                print ("result", result)
+                if result[0]['Sumup'] == None:
+                     result[0]['Sumup'] = 0
+                else:
+                    result[0]['Sumup'] = int(result[0]['Sumup'])
+                    print result
                 # print int(result['sumup'])
                 # print result[0]['frist_name']
                 # print result[0,'first_name']
