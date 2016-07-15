@@ -1,12 +1,12 @@
 from system.core.router import routes
 
-routes['default_controller'] = 'User'
-routes['POST']['/login'] = 'User#login'
-routes['POST']['/register'] = 'User#register'
-routes['GET']['/logout'] = 'User#logout'
-routes['GET']['/poke_summary'] = 'Poke#poke_summary'
-routes['GET']['/show_others'] = 'Poke#show_others'
-routes['GET']['/poke_me/<id>'] = 'Poke#poke_me'
+routes['default_controller'] = 'user'
+routes['POST']['/login'] = 'user#login'
+routes['POST']['/register'] = 'user#register'
+routes['GET']['/logout'] = 'user#logout'
+routes['GET']['/poke_summary'] = 'poke#poke_summary'
+routes['GET']['/show_others'] = 'poke#show_others'
+routes['GET']['/poke_me/<id>'] = 'poke#poke_me'
 
 
 

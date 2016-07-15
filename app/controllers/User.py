@@ -1,10 +1,10 @@
 from system.core.controller import *
 from flask import Flask, session, flash
 
-class User(Controller):
+class user(Controller):
     def __init__(self, action):
-        super(User, self).__init__(action)
-        self.load_model('User_Model')
+        super(user, self).__init__(action)
+        self.load_model('userModel')
 
     def index(self):
         #It is needed for inital page load
@@ -17,7 +17,7 @@ class User(Controller):
             'passw' : request.form['passw']
         }
         #sending information to model
-        user_login = self.models['User_Model'].login_user(user_info)
+        user_login = self.models['userModel'].login_user(user_info)
         
         #information returned from model
         if user_login['status']  == False:
@@ -45,7 +45,7 @@ class User(Controller):
         }
 
         #sending information to model
-        user_register = self.models['User_Model'].register_user(user_info)
+        user_register = self.models['userModel'].register_user(user_info)
 
         #process returned information
         if user_register['status'] == False:

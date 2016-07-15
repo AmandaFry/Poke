@@ -8,9 +8,9 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9\.\+_-]+@[a-zA-Z0-9\._-]+\.[a-zA-Z]*$')
 NOSPACE_REGEX = re.compile(r'^[a-zA-Z0-9]*$')
 PW_REGEX = re.compile(r'^(?=.*?[A-Z])(?=.*?\d)[A-Za-z\d]{8,}$')
 
-class User_Model(Model):
+class userModel(Model):
     def __init__(self):
-        super(User_Model, self).__init__()
+        super(userModel, self).__init__()
 
     def login_user(self, user_info):
         # to collect error messages

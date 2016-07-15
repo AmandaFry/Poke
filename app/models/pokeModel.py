@@ -1,9 +1,9 @@
 from system.core.model import Model
 from flask import Flask, session
 
-class Poke_Model(Model):
+class pokeModel(Model):
     def __init__(self):
-        super(Poke_Model, self).__init__()
+        super(pokeModel, self).__init__()
 
     def number_of_pokes(self):
         query = "SELECT distinct COUNT(poking) AS counted FROM pokes where being_poked = :id"
@@ -39,30 +39,18 @@ class Poke_Model(Model):
                 count = count + 1
             else:
                 # print " count is: ", count
-                query = "SELECT users.id, users.first_name, users.last_name, users.alias, users.email, sum(pokes.number_of_poke) AS Sumup FROM users LEFT JOIN pokes ON users.id = pokes.being_poked WHERE users.id = :id "
+                query = "SELECT users.id, users.first_name, users.last_name, users.alias, users.email, sum(pokes.number_of_poke) AS sumup FROM users LEFT JOIN pokes ON users.id = pokes.being_poked WHERE users.id = :id "
                 data = {'id' : count}
                 result = self.db.query_db(query,data)
                 # print ("result", result)
-                if result[0]['Sumup'] == None:
-                     result[0]['Sumup'] = 0
+                if result[0]['sumup'] == None:
+                     result[0]['sumup'] = 0
                 else:
-                    result[0]['Sumup'] = int(result[0]['Sumup'])
-                    # print result
-                # print int(result['sumup'])
-                # print result[0]['frist_name']
-                # print result[0,'first_name']
+                    #the sumup came back as decimal I need to assing the result[0][sumup] value as int first
+                    result[0]['sumup'] = int(result[0]['sumup'])
                 show_others.append(result)
                 count = count + 1
 
-        # query = "SELECT users.id, users.first_name, users.last_name, users.alias, users.email, pokes.being_poked, pokes.number_of_poke FROM users LEFT JOIN pokes ON users.id = pokes.being_poked WHERE users.id != :id "
-        # data = { 'id' : session['id']}
-        # # show_others = self.db.query_db(query,data)
-        # print ('^' * 25)
-        # print show_others
-        # print ('^' * 25)
-        # query = "SELECT SUM(number_of_poke) FROM pokes WHERE being_poked =:id"
-        # data = {'being_poked_id': id}
-        # sum_of_poke
         return (show_others)
 
     
