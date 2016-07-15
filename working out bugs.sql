@@ -38,8 +38,11 @@ SELECT users.id, users.first_name, users.last_name, users.alias, users.email, po
 LEFT JOIN pokes ON users.id = pokes.being_poked
 WHERE users.id !=4;
 
+SELECT distinct COUNT(poking) FROM pokes where being_poked = 1 ;
+
+
 
 SELECT SUM(number_of_poke) FROM pokes WHERE being_poked = 3;
 
-SELECT COUNT(*) FROM users
+SELECT COUNT(*) FROM users;
 
